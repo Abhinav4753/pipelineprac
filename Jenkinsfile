@@ -1,27 +1,28 @@
 pipeline{
-
     agent any
     stages{
         stage("Compile"){
             steps{
-                echo 'javac Test.java'
+                echo 'Compiling Test.java'
+                bat 'javac Test.java' // Assuming you are running on a Windows agent, use 'sh' for Unix
             }
         }
-        stage("run"){
+        stage("Run"){
             steps{
-                echo "java Test"
+                echo 'Running Test.class'
+                bat 'java Test' // Assuming you are running on a Windows agent, use 'sh' for Unix
             }
         }
     }
     post{
         always{
-            echo"always"
+            echo 'Always executed'
         }
         success{
-            echo "success"
+            echo 'Success!'
         }
         failure{
-            echo"failure"
+            echo 'Failure!'
         }
     }
 }
