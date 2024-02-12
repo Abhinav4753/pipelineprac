@@ -13,6 +13,14 @@ pipeline{
                 bat 'java Test' // Assuming you are running on a Windows agent, use 'sh' for Unix
             }
         }
+        stage("Test") {
+            steps {
+                echo 'Running Tests'
+                script {
+                    bat(script: 'java -cp .;path/to/test/jars org.junit.runner.JUnitCore Test', returnStatus: true)
+                }
+            }
+        }
     }
     post{
         always{
